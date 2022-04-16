@@ -1,7 +1,8 @@
-from multiprocessing.spawn import import_main_path
+#from multiprocessing.spawn import import_main_path
 from cards import Deck
 from player import Player
 from battle import Battle
+import unittest
 
 def main():
     player1 = Player()
@@ -21,14 +22,14 @@ def run(deck, player1, player2):
 
     while play == True:    
         print("Press s to start or e to exit")
-        print(">", end='')
+        #print(">", end='')
         userIn = input()
         if(userIn == "e"):
             play = False
         elif(userIn == "s"):
             while run == True:
                 print("Press:\n- f for a single round\n- r for 100 rounds\n- a for full game\n- x to exit")
-                print(">", end='')
+                #print(">", end='')
                 userIn = input()
                 if(userIn == "f"):
                     if player1.hand and player2.hand:
