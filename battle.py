@@ -1,5 +1,4 @@
-from player import Player
-from cards import Card, Deck
+import unittest
 
 class Battle:
     def __init__(self, player1in, player2in):
