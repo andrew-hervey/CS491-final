@@ -83,4 +83,4 @@ class Testing(unittest.TestCase):
         player2 = Player()
         battle = Battle(player1, player2)
         outcome = battle.fight()
-        self.assertEqual(outcome, 2)
+        self.assertEqual(outcome, 1)
