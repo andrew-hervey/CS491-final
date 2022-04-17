@@ -2,7 +2,6 @@ from cards import Deck
 from player import Player
 from battle import Battle
 import unittest
-#from six.moves import input
 
 def main():
     player1 = Player()
