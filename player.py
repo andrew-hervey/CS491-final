@@ -25,7 +25,7 @@ class Testing(unittest.TestCase):
     def testCreatePlayer(self):
         player = Player()
         self.assertIsNotNone(player)
-
+        
     def testCountHandNoCards(self):
         player = Player()
         self.assertEqual(player.countHand(),0)  
