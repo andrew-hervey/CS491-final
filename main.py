@@ -2,7 +2,7 @@ from cards import Deck
 from player import Player
 from battle import Battle
 import unittest
-from six.moves import input
+#from six.moves import input
 
 def main():
     player1 = Player()
@@ -84,4 +84,4 @@ class Testing(unittest.TestCase):
         player2 = Player()
         battle = Battle(player1, player2)
         outcome = battle.fight()
-        self.assertEqual(outcome, 1)
+        self.assertEqual(outcome, 2)
