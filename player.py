@@ -3,11 +3,12 @@ import unittest
 
 class Player:
     def __init__(self, deck=[]):
-        self.hand = []
-        if isinstance(deck, type(Deck)):
-            self.hand = deck
+        if not isinstance(deck, type(Deck)):
+            self.hand = []
+            return
         else:
-            print("Not a deck object")
+            self.hand = deck
+            return
 
     #adds card to bottom of stack
     def takeCard(self, card):
@@ -25,7 +26,7 @@ class Testing(unittest.TestCase):
     def testCreatePlayer(self):
         player = Player()
         self.assertIsNotNone(player)
-        
+
     def testCountHandNoCards(self):
         player = Player()
         self.assertEqual(player.countHand(),0)  
