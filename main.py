@@ -1,4 +1,3 @@
-#from multiprocessing.spawn import import_main_path
 from cards import Deck
 from player import Player
 from battle import Battle
@@ -9,19 +8,22 @@ def main():
     player1 = Player()
     player2 = Player()
     deck = Deck()
-    winner = run(deck, player1, player2)
+    splitDeck(deck, player1, player2)
+    winner = run(player1, player2)
     if winner == 1 or winner == 2:
-        print("The winner is Player " + str(winner))
-    
+        print("The winner is Player " + str(winner) + "!")
 
-def run(deck, player1, player2):
+def splitDeck(deck, player1, player2):
     deck.shuffleDeck()
     deck.shuffleDeck()
-    run = True
-    play = True
     for i in range(26):
         player1.takeCard(deck.drawCard())
         player2.takeCard(deck.drawCard())
+    
+
+def run(player1, player2):
+    run = True
+    play = True
 
     while play == True:    
         print("Press s to start or e to exit")
@@ -74,3 +76,12 @@ def run(deck, player1, player2):
 
 if __name__ == "__main__":
     main()
+
+class Testing(unittest.TestCase):
+    def testRunFunction(self):
+        deck = Deck()
+        player1 = Player(deck)
+        player2 = Player()
+        battle = Battle(player1, player2)
+        outcome = battle.fight()
+        self.assertEqual(outcome, 1)

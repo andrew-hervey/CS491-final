@@ -3,12 +3,11 @@ import unittest
 
 class Player:
     def __init__(self, deck=[]):
-        if not deck:
-            self.hand = []
-        elif isinstance(deck, type(Deck)):
+        self.hand = []
+        if isinstance(deck, type(Deck)):
             self.hand = deck
         else:
-            return
+            print("Not a deck object")
 
     #adds card to bottom of stack
     def takeCard(self, card):
@@ -42,4 +41,5 @@ class Testing(unittest.TestCase):
         card = Card("Diamonds", 5)
         player.takeCard(card)
         self.assertIsInstance(player.playCard(),Card)
+
     

@@ -1,3 +1,4 @@
+from cards import Card
 import unittest
 
 class Battle:
@@ -16,6 +17,40 @@ class Battle:
             return 3
 
     def fight(self):
+
+        #tests for 1 or no cards
+        if len(self.player1.hand) == 1 or len(self.player2.hand) == 1:
+            if len(self.player1.hand) == 1:
+                print("One card in player 1's hand, last stand!!")
+            else:
+                print("One card in player 2's hand, last stand!!")
+            turnP1 = self.player1.playCard()
+            turnP2 = self.player2.playCard()
+            print("Player 1 played: " + turnP1.seeCard())
+            print("Player 2 played: " + turnP2.seeCard())
+            result = self.compare(turnP1, turnP2)
+            if(result == 1):
+                print("Standoff won by Player 1 with the higher card")
+                self.player1.takeCard(turnP1)
+                self.player1.takeCard(turnP2)
+                print("-Player 1 has " + str(self.player1.countHand()) + " cards and Player 2 has " + str(self.player2.countHand()) + " cards-" + "\n")
+                return 1
+            elif(result == 2):
+                print("Standoff won by Player 2 with the higher card")
+                self.player2.takeCard(turnP1)
+                self.player2.takeCard(turnP2)
+                print("-Player 1 has " + str(self.player1.countHand()) + " cards and Player 2 has " + str(self.player2.countHand()) + " cards-" + "\n")
+                return 2
+        elif not self.player1.hand:
+            print("Player 1 bled out, war over")
+            return 1
+        elif not self.player2.hand:
+            print("Player 2 bled out, war over")
+            return 2
+        else:
+            return
+        
+
         turnP1 = self.player1.playCard()
         turnP2 = self.player2.playCard()
         print("Player 1 played: " + turnP1.seeCard())
@@ -67,10 +102,10 @@ class Battle:
                 return 2
         if not self.player1.hand:
             print("Player 1 bled out, war over")
-            return 0
+            return 2
         if not self.player2.hand:
             print("Player 2 bled out, war over")
-            return 0
+            return 1
 
         burnP1 = self.player1.playCard()
         burnP2 = self.player2.playCard()
