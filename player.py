@@ -1,10 +1,14 @@
 from cards import Card, Deck
 import unittest
-MAX_HAND = 7
 
 class Player:
-    def __init__(self):
-        self.hand = []
+    def __init__(self, deck=[]):
+        if not deck:
+            self.hand = []
+        elif isinstance(deck, type(Deck)):
+            self.hand = deck
+        else:
+            return
 
     #adds card to bottom of stack
     def takeCard(self, card):
@@ -13,10 +17,6 @@ class Player:
     #returns amount of cards in hand
     def countHand(self):
         return len(self.hand)
-
-    #prints card name and number
-    def flipCard(self):
-        print(self.hand.seeCard())
 
     #pops card from top of stack
     def playCard(self):
@@ -27,14 +27,19 @@ class Testing(unittest.TestCase):
         player = Player()
         self.assertIsNotNone(player)
 
-    def testCountHand(self):
+    def testCountHandNoCards(self):
+        player = Player()
+        self.assertEqual(player.countHand(),0)  
+    
+    def testCountHandOneCard(self):
         player = Player()
         card = Card("Diamonds", 5)
         player.takeCard(card)
         self.assertEqual(player.countHand(),1)    
 
-    def testPlayCard(self):
+    def testPlayCardWorks(self):
         player = Player()
         card = Card("Diamonds", 5)
         player.takeCard(card)
         self.assertIsInstance(player.playCard(),Card)
+    
