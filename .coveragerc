@@ -1,0 +1,3 @@
+[run]
+source = .
+omit = ./usr/lib/python/dist-packages/*, *__init__.py,*_compat.py,*_config.py,*_funcs.py,*_make.py,*_version_info.py,*converters.py,*exceptions.py,*filters.py,*validators.py

@@ -47,22 +47,3 @@ class Deck:
     def drawCard(self):
         return self.cards.pop(0)
 
-
-class Testing(unittest.TestCase):
-    def testCardCreationValue(self):
-        card = Card("Diamonds", 5)
-        self.assertEqual(5, card.getCardVal())
-
-    def testCardCreationSuit(self):
-        card = Card("Diamonds", 5)
-        self.assertEqual("Diamonds", card.getCardSuit())
-
-    def testSeeCard(self):
-        card = Card("Diamonds", 5)
-        self.assertEqual("5 of Diamonds", card.seeCard())
-
-    def checkShuffle(self):
-        deck1 = Deck()
-        deck2 = Deck()
-        deck2.shuffleDeck()
-        self.assertNotEqual(deck1, deck2)

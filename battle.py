@@ -13,11 +13,12 @@ class Battle:
             c2val = card2.getCardVal()
             if c1val > c2val:
                 return 1
-            if c1val > c2val:
+            elif c1val < c2val:
                 return 2
-            if c1val == c2val:
+            elif c1val == c2val:
                 return 3
         else:
+            print("error return compare")
             return -1
 
 
@@ -31,41 +32,15 @@ class Battle:
         else:
             print("-Player 1 has " + str(p1.countHand()) + " cards and Player 2 has " + str(p2.countHand()) + " cards-" + "\n")
             return
-            
-    def fight(self):
 
-        #tests for 1 or no cards
-        if len(self.player1.hand) == 1 or len(self.player2.hand) == 1:
-            if len(self.player1.hand) == 1:
-                print("One card in player 1's hand, last stand!!")
-            else:
-                print("One card in player 2's hand, last stand!!")
-            turnP1 = self.player1.playCard()
-            turnP2 = self.player2.playCard()
-            print("Player 1 played: " + turnP1.seeCard())
-            print("Player 2 played: " + turnP2.seeCard())
-            result = self.compare(turnP1, turnP2)
-            if(result == 1):
-                print("Standoff won by Player 1 with the higher card")
-                self.player1.takeCard(turnP1)
-                self.player1.takeCard(turnP2)
-                self.printCardCount(self.player1, self.player2)
-                return 1
-            elif(result == 2):
-                print("Standoff won by Player 2 with the higher card")
-                self.player2.takeCard(turnP1)
-                self.player2.takeCard(turnP2)
-                self.printCardCount(self.player1, self.player2)
-                return 2
-        elif not self.player1.hand:
-            print("Player 1 bled out, war over")
-            return 1
-        elif not self.player2.hand:
-            print("Player 2 bled out, war over")
+    def fight(self):
+        self.lastStand_standoff(False)   
+        if self.player1.countHand() == 0:
             return 2
+        elif self.player2.countHand() == 0:
+            return 1
         else:
-            return
-        
+            pass
 
         turnP1 = self.player1.playCard()
         turnP2 = self.player2.playCard()
@@ -99,13 +74,24 @@ class Battle:
                 print("Player 2 won the war!")
                 self.printCardCount(self.player1, self.player2)
                 return
+        else:
+            print("error during fight")
 
 
-
-
-    def war(self):
-        if len(self.player1.hand) == 1 or len(self.player2.hand) == 1:
-            print("Not enough cards for war, it's a standoff!")
+    def lastStand_standoff(self, isWar):
+        if self.player1.countHand() == 1 or self.player2.countHand() == 1:
+            if self.player1.countHand() == 1 and isWar == False:
+                print("One card in player 1's hand, last stand!!")
+            elif self.player2.countHand() == 1 and isWar == False:
+                print("One card in player 2's hand, last stand!!")
+            else:
+                pass
+            
+            if isWar == True:
+                print("Not enough cards for war, it's a standoff!")
+            else:
+                pass
+            
             turnP1 = self.player1.playCard()
             turnP2 = self.player2.playCard()
             print("Player 1 played: " + turnP1.seeCard())
@@ -123,12 +109,19 @@ class Battle:
                 self.player2.takeCard(turnP2)
                 self.printCardCount(self.player1, self.player2)
                 return 2
-        if not self.player1.hand:
+        elif not self.player1.hand:
             print("Player 1 bled out, war over")
-            return 2
-        if not self.player2.hand:
-            print("Player 2 bled out, war over")
             return 1
+        elif not self.player2.hand:
+            print("Player 2 bled out, war over")
+            return 2
+
+    def war(self):
+        if self.player1.countHand() < 4 or self.player2.countHand() < 4:
+            self.lastStand_standoff(True)
+            return
+        else:
+            pass
 
         burnP1 = self.player1.playCard()
         burnP2 = self.player2.playCard()
@@ -140,15 +133,17 @@ class Battle:
         print("Player 2 played: " + turnP2.seeCard())
         result = self.compare(turnP1, turnP2)
         if(result == 1):
-            #print("before war win for p1 hand" + str(self.player1.countHand()) + " :: p2 hand" + str(self.player2.countHand()))
+            print("before war win for p1 hand" + str(self.player1.countHand()) + " :: p2 hand" + str(self.player2.countHand()))
             self.player1.takeCard(burnP1)
             self.player1.takeCard(burnP2)
             self.player1.takeCard(turnP1)
             self.player1.takeCard(turnP2)
 
-            #print("p1 took cards")
+            print("p1 took cards")
             return 1
         elif(result == 2):
+            print("before war win for p2 hand" + str(self.player2.countHand()) + " :: p1 hand" + str(self.player1.countHand()))
+
             self.player2.takeCard(burnP1)
             self.player2.takeCard(burnP2)
             self.player2.takeCard(turnP1)
@@ -169,30 +164,3 @@ class Battle:
                 self.player2.takeCard(turnP2)
             return outcome
         
-class Testing(unittest.TestCase):
-    
-    def testCompareHigherC1(self):
-        card1 = Card("Hearts", 7)
-        card2 = Card("Diamonds", 5)
-        player1 = Player()
-        player2 = Player()
-        player1.takeCard(card1)
-        player2.takeCard(card2)
-        battle = Battle(player1, player2)
-        outcome = battle.compare(battle.player1.playCard(), battle.player2.playCard())
-        self.assertEqual(outcome, 1)
-    
-    def testCompareEqualValue(self):
-        card2 = Card("Diamonds", 5)
-        card1 = Card("Hearts", 5)
-        player1 = Player()
-        player2 = Player()
-        player1.takeCard(card1)
-        player2.takeCard(card2)
-        battle = Battle(player1, player2)
-        outcome = battle.compare(battle.player1.playCard(), battle.player2.playCard())
-        self.assertEqual(outcome, 3)
-    
-    def testCompareNotCardInput(self):
-        outcome = Battle.compare(self, 1, 2)
-        self.assertEqual(outcome, -1)
