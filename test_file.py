@@ -37,6 +37,14 @@ class Testing(unittest.TestCase):
         outcome = Battle.compare(self, 1, 2)
         self.assertEqual(outcome, -1)
     
+    def testPrintCardCount00(self):
+        deck = Deck()
+        player1 = Player()
+        player2 = Player()
+        battle = Battle(player1, player2)
+        counts = battle.printCardCount()
+        self.assertEqual(counts, "0 0")
+    
     #E/O BATTLE TESTS
 
     #=========================================================================

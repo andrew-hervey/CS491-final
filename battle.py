@@ -22,16 +22,17 @@ class Battle:
             return -1
 
 
-    def printCardCount(self, p1, p2):
-        if p1.countHand() == 1:
-            print("-Player 1 has " + str(p1.countHand()) + " card and Player 2 has " + str(p2.countHand()) + " cards-" + "\n")
-            return
-        elif p2.countHand() == 1:
-            print("-Player 1 has " + str(p1.countHand()) + " cards and Player 2 has " + str(p2.countHand()) + " card-" + "\n")             
-            return
+    def printCardCount(self):
+        strReturn = str(str(self.player1.countHand()) + " " + str(self.player2.countHand()))
+        if self.player1.countHand() == 1:
+            print("-Player 1 has " + str(self.player1.countHand()) + " card and Player 2 has " + str(self.player2.countHand()) + " cards-" + "\n")
+            return strReturn
+        elif self.player2.countHand() == 1:
+            print("-Player 1 has " + str(self.player1.countHand()) + " cards and Player 2 has " + str(self.player2.countHand()) + " card-" + "\n")             
+            return strReturn
         else:
-            print("-Player 1 has " + str(p1.countHand()) + " cards and Player 2 has " + str(p2.countHand()) + " cards-" + "\n")
-            return
+            print("-Player 1 has " + str(self.player1.countHand()) + " cards and Player 2 has " + str(self.player2.countHand()) + " cards-" + "\n")
+            return strReturn
 
     def fight(self):
         self.lastStand_standoff(False)   
@@ -51,13 +52,13 @@ class Battle:
             print("Skirmish won by Player 1 with the higher card")
             self.player1.takeCard(turnP1)
             self.player1.takeCard(turnP2)
-            self.printCardCount(self.player1, self.player2)
+            self.printCardCount()
             return
         elif(result == 2):
             print("Skirmish won by Player 2 with the higher card")
             self.player2.takeCard(turnP1)
             self.player2.takeCard(turnP2)
-            self.printCardCount(self.player1, self.player2)
+            self.printCardCount()
             return
         elif(result == 3):
             print("This is war!")
@@ -66,13 +67,13 @@ class Battle:
                 self.player1.takeCard(turnP1)
                 self.player1.takeCard(turnP2)
                 print("Player 1 won the war!")
-                self.printCardCount(self.player1, self.player2)
+                self.printCardCount()
                 return
             elif(outcome == 2):
                 self.player2.takeCard(turnP1)
                 self.player2.takeCard(turnP2)
                 print("Player 2 won the war!")
-                self.printCardCount(self.player1, self.player2)
+                self.printCardCount()
                 return
         else:
             print("error during fight")
@@ -101,13 +102,13 @@ class Battle:
                 print("Standoff won by Player 1 with the higher card")
                 self.player1.takeCard(turnP1)
                 self.player1.takeCard(turnP2)
-                self.printCardCount(self.player1, self.player2)
+                self.printCardCount()
                 return 1
             elif(result == 2):
                 print("Standoff won by Player 2 with the higher card")
                 self.player2.takeCard(turnP1)
                 self.player2.takeCard(turnP2)
-                self.printCardCount(self.player1, self.player2)
+                self.printCardCount()
                 return 2
         elif not self.player1.hand:
             print("Player 1 bled out, war over")
