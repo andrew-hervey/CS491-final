@@ -22,6 +22,7 @@ def splitDeck(deck, player1, player2):
     
 
 def run(player1, player2):
+    print("print")
     run = True
     play = True
     while play == True:    
