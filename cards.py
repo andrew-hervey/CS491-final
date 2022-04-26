@@ -46,4 +46,9 @@ class Deck:
 
     def drawCard(self):
         return self.cards.pop(0)
-
+    
+    def getDeckCount(self):
+        count = 0
+        for i in range(len(self.cards)):
+            count+=1
+        return count

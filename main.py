@@ -11,6 +11,7 @@ def main():
     winner = run(player1, player2)
     if winner == 1 or winner == 2:
         print("The winner is Player " + str(winner) + "!")
+        return str("The winner is Player " + str(winner) + "!")
 
 def splitDeck(deck, player1, player2):
     deck.shuffleDeck()
@@ -25,15 +26,15 @@ def run(player1, player2):
     play = True
     while play == True:    
         print("Press s to start or e to exit")
-        userIn = input('>')
-        if(userIn == "e"):
+        userIn1 = input('>')
+        if(userIn1 == "e"):
             play = False
             return -1
-        elif(userIn == "s"):
+        elif(userIn1 == "s"):
             while run == True:
                 print("Press:\n- f for a single round\n- r for 100 rounds\n- a for full game\n- x to exit")
-                userIn = input('>')
-                if userIn == "f":
+                userIn2 = input('>>')
+                if userIn2 == "f":
                     if player1.hand and player2.hand:
                         battle = Battle(player1, player2)
                         battle.fight()
@@ -41,7 +42,7 @@ def run(player1, player2):
                         return 2
                     elif not player2.hand:
                         return 1
-                elif userIn == "r":
+                elif userIn2 == "r":
                     for i in range(100):
                         if player1.hand and player2.hand:
                             battle = Battle(player1, player2)
@@ -50,7 +51,7 @@ def run(player1, player2):
                             return 2
                         elif not player2.hand:
                             return 1
-                elif userIn == "a":
+                elif userIn2 == "a":
                     count = 0
                     while run:
                         if (count % 26) == 0:
@@ -71,7 +72,7 @@ def run(player1, player2):
                         elif not player2.hand:
                             print("The game automatically ran for " + str(count) + " rounds")
                             return 1
-                elif userIn == "x":
+                elif userIn2 == "x":
                     run == False
                     return -1
                 else:

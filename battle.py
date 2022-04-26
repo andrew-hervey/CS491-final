@@ -110,6 +110,13 @@ class Battle:
                 self.player2.takeCard(turnP2)
                 self.printCardCount()
                 return 2
+            elif(result == 3):
+                print("Tie in standoff, there is no victor")
+                self.player1.takeCard(turnP1)
+                self.player2.takeCard(turnP2)
+                self.printCardCount()
+                return 3
+
         elif not self.player1.hand:
             print("Player 1 bled out, war over")
             return 1
@@ -118,7 +125,7 @@ class Battle:
             return 2
 
     def war(self):
-        if self.player1.countHand() < 4 or self.player2.countHand() < 4:
+        if self.player1.countHand() < 3 or self.player2.countHand() < 3:
             self.lastStand_standoff(True)
             return
         else:
