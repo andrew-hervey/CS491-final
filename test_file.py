@@ -1,4 +1,3 @@
-from importlib.resources import path
 from unittest import mock
 from cards import Card, Deck
 from main import main, splitDeck, run
