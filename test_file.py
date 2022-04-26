@@ -11,7 +11,25 @@ class Testing(unittest.TestCase):
     #commands used:
     #python3 -m coverage run -m pytest test_file.py
     #python3 -m coverage report
+
+
+    #Integration tests ~ list of functions
+    # testCompareHigherC1
+    # testCompareEqualValue
+    # testPrintCardCount00
+    # testFight* tests
+    # testLastStand_* tests
+    # testWar* tests
+    # testFightIntoWarP1Win
+    # testTakeCard
+    # testCreatePlayerWithDeck
+    # testCountHandOneCard
+    # testPlayCardWorks
+    # testSplitDeckNotFull
+    # testMain
+    # testRunFunction_*
     
+    #NOTE: the * denotes regex of other names following the same start
     #=========================================================================
 
     #BATTLE TESTS
@@ -156,7 +174,7 @@ class Testing(unittest.TestCase):
         outcome = battle.war()
         self.assertEqual(outcome, 2)
 
-    def testWarSecondLevelP2Win(self):
+    def testWar_SecondLevelP2Win(self):
         player1 = Player()
         player2 = Player()
 
@@ -198,7 +216,7 @@ class Testing(unittest.TestCase):
         outcome = battle.war()
         self.assertEqual(outcome, 2)
     
-    def testWarSecondLevelP1Win(self):
+    def testWar_SecondLevelP1Win(self):
         player1 = Player()
         player2 = Player()
 
@@ -240,7 +258,7 @@ class Testing(unittest.TestCase):
         outcome = battle.war()
         self.assertEqual(outcome, 1)
     
-    def testWarSecondLevelP2Win(self):
+    def testWar_SecondLevelP2Win(self):
         player1 = Player()
         player2 = Player()
 
@@ -383,14 +401,6 @@ class Testing(unittest.TestCase):
 
     #MAIN TESTS
 
-    def testRunFunctionActions(self):
-        deck = Deck()
-        player1 = Player(deck)
-        player2 = Player()
-        battle = Battle(player1, player2)
-        outcome = battle.fight()
-        self.assertEqual(outcome, 2)
-
     def testSplitDeckNotFull(self):
         deck1 = Deck()
         deck2 = Deck()
@@ -414,7 +424,15 @@ class Testing(unittest.TestCase):
         assert mock_method.call_count == 2
         assert result == ('The winner is Player 1!') or ('The winner is Player 2!')
 
-    def testRunFunctionP1Win(self):
+    def testRunFunction_Actions(self):
+        deck = Deck()
+        player1 = Player(deck)
+        player2 = Player()
+        battle = Battle(player1, player2)
+        outcome = battle.fight()
+        self.assertEqual(outcome, 2)
+
+    def testRunFunction_P1Win(self):
         input_mock_s = Mock()
         input_mock_s.return_value = "s"
 
