@@ -1,6 +1,7 @@
 # CS491-final
 
 The code is fully built through the automated testing, which installs the packages (pytest and coverage) and then runs the tests.
+
 ==========================================
 
 The only commands used are:
@@ -24,3 +25,7 @@ player.py - 90%
 test_file.py - 90%
 
 TOTAL - 92%
+
+==========================================
+
+Regarding integration tests, there are at least 10 tests in test_file.py that are integration tests. Although each test is sorted by what general file it tests from, most of the tests use components from others and test the overall integration. See test_file.py for list of integration tests
