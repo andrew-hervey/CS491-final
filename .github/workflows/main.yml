@@ -8,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7", "3.8", "3.9"]
+        python-version: ["3.8", "3.9"]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
@@ -21,8 +21,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install coverage
           pip install pytest
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Test with pytest
         run: |
           python3 -m coverage run -m pytest test_file.py
           python3 -m coverage report
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: deploy to Docker registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: andrewh427/cs491final:latest
