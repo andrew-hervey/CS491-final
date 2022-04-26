@@ -7,7 +7,7 @@ The only commands used are:
 
    docker pull andrewh427/cs491final
 
-   docker run -it conway5525/cs491final:latest
+   docker run -it andrewh427/cs491final:latest
  
 ==========================================
 
