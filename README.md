@@ -2,9 +2,17 @@
 
 The code is fully built through the automated testing, which installs the packages (pytest and coverage) and then runs the tests.
 
+Github actions were used for integration, and then Docker is what does the continuous deployment. The tests run through pytest, with coverage printing the total report.
+
 ==========================================
 
-The only commands used are:
+Main commands:
+
+   python3 -m coverage run -m pytest test_file.py
+   
+   python3 -m coverage report
+
+Docker commands:
 
    docker pull andrewh427/cs491final
 
