@@ -141,7 +141,6 @@ class Battle:
         print("Player 2 played: " + turnP2.seeCard())
         result = self.compare(turnP1, turnP2)
         if(result == 1):
-            print("before war win for p1 hand" + str(self.player1.countHand()) + " :: p2 hand" + str(self.player2.countHand()))
             self.player1.takeCard(burnP1)
             self.player1.takeCard(burnP2)
             self.player1.takeCard(turnP1)
@@ -150,8 +149,6 @@ class Battle:
             print("p1 took cards")
             return 1
         elif(result == 2):
-            print("before war win for p2 hand" + str(self.player2.countHand()) + " :: p1 hand" + str(self.player1.countHand()))
-
             self.player2.takeCard(burnP1)
             self.player2.takeCard(burnP2)
             self.player2.takeCard(turnP1)
